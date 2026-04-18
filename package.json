@@ -1,0 +1,18 @@
+{
+  "name": "vet-clinic-chatbot-node",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "@langchain/core": "^0.3.68",
+    "@langchain/google-genai": "^0.2.13",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "langchain": "^0.3.36",
+    "zod": "^3.25.67"
+  }
+}

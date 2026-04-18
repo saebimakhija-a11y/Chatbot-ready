@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chatbot UI</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; max-width: 760px; }
+    h1 { margin: 0 0 16px; }
+    .row { display: flex; gap: 8px; margin-bottom: 10px; }
+    input, button, textarea { font-size: 14px; }
+    input, textarea { width: 100%; padding: 8px; }
+    button { padding: 8px 12px; cursor: pointer; }
+    #chat { border: 1px solid #ccc; padding: 12px; min-height: 240px; white-space: pre-wrap; }
+    .meta { color: #666; font-size: 12px; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <h1>PDF Source Chatbot</h1>
+  <div class="meta">Single source of truth: your PDF content loaded in <code>data/source-of-truth.txt</code></div>
+  <div class="row">
+    <input id="sessionId" placeholder="session id (memory key)" value="default-session" />
+    <button id="clearBtn" type="button">Clear Memory</button>
+  </div>
+  <div class="row">
+    <textarea id="message" rows="3" placeholder="Ask a question..."></textarea>
+  </div>
+  <div class="row">
+    <button id="sendBtn" type="button">Send</button>
+  </div>
+  <div id="chat"></div>
+
+  <script>
+    const chat = document.getElementById("chat");
+    const sessionInput = document.getElementById("sessionId");
+    const messageInput = document.getElementById("message");
+    const sendBtn = document.getElementById("sendBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    function appendLine(label, obj) {
+      chat.textContent += `${label}\n${JSON.stringify(obj, null, 2)}\n\n`;
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    sendBtn.addEventListener("click", async () => {
+      const message = messageInput.value.trim();
+      const sessionId = sessionInput.value.trim() || "default-session";
+      if (!message) return;
+      appendLine("USER", { message, sessionId });
+      messageInput.value = "";
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message, sessionId })
+        });
+        const data = await res.json();
+        appendLine("BOT", data);
+      } catch (err) {
+        appendLine("ERROR", { error: err.message });
+      }
+    });
+
+    clearBtn.addEventListener("click", async () => {
+      const sessionId = sessionInput.value.trim() || "default-session";
+      const res = await fetch("/api/memory/clear", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId })
+      });
+      const data = await res.json();
+      appendLine("SYSTEM", data);
+    });
+  </script>
+</body>
+</html>
