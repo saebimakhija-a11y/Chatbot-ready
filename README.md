@@ -64,8 +64,7 @@ Successfully developed and deployed a fully functional veterinary clinic chatbot
 
 📸 Project Preview
 
-<img width="900" height="407" alt="Screenshot 2026-05-13 134129" src="https://github.com/user-attachments/assets/b8cf8ed3-8677-4d09-8377-e86f4b1b2188" /><img width="1263" height="407" alt="Screenshot 2026-05-13 134129" src="https://github.com/user-attachments/assets/40c8ee32-2157-4a6e-b919-4c65407b9b74" />
-
+<img width="900" height="407" alt="Screenshot 2026-05-13 134129" src="https://github.com/user-attachments/assets/b8cf8ed3-8677-4d09-8377-e86f4b1b2188" />
 
 
 🔗 Repository
