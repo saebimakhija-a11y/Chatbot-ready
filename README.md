@@ -1,62 +1,82 @@
-# Veterinary Clinic Node/Express API (Gemini + LangChain)
+# Veterinary Clinic Chatbot 🐾
 
-This project implements a Node/Express JSON API chatbot and booking engine for a veterinary clinic sterilisation flow, using your provided document as the only context source.
+This project implements a Node/Express JSON API Veterinary Clinic Chatbot and booking engine for a veterinary clinic sterilisation flow, using  a centralized clinic knowledge base and operational rules, deployed with Retrieval-Augmented Generation (RAG) .
 
-## Features
 
-- Express JSON API backend
-- Booking decision engine with:
-  - Monday-Thursday operating-day validation
-  - Daily 240-minute quota
-  - Dog cap of max 2/day
-  - Species/sex/weight-based service durations
-  - Dog-in-heat rejection rule
-  - Blood-test-required rule for age > 6
-  - Clear confirmation/rejection payloads
-- Short-term memory (session-based recent chat turns)
-- Semantic retrieval using embeddings over source-of-truth document context
-- LangChain prompt chain with Gemini model
-- Vercel-ready configuration (`vercel.json`)
+📌 Project Overview
 
-## Setup
+This project is focused on designing, developing, and deploying a functional AI chatbot for a veterinary clinic environment. The chatbot was created to assist users with clinic-related queries such as appointment scheduling, operational procedures, available services, clinic timings, operatinal pre-requisites and all that following clinic's communication protocols.
 
-1. Install dependencies:
+The system was built using a Retrieval-Augmented Generation (RAG) architecture, where responses were grounded in a single source-of-truth document provided for the project.
 
-```bash
-npm install
-```
+The chatbot was successfully deployed on Vercel with a production-ready configuration and traceable logs.
 
-2. Configure environment variables:
+🎯 Objectives
+Build an AI-powered chatbot capable of answering veterinary clinic queries.
+Deliver a Minimum Viable Product (MVP) and iteratively improve functionality. 
 
-```bash
-copy .env.example .env
-```
+🛠 Technologies & Tools Used
+**Development & AI**
+Python
+LangChain
+Gemini Model
+Retrieval-Augmented Generation (RAG)
+Semantic Retrieval
+Cursor IDE
 
-Then edit `.env` and set your real `GEMINI_API_KEY`.
+**Deployment & Infrastructure**
+Vercel
+vercel.json configuration
+GitHub
+FastAPI integration and secure environment variable management within Vercel Project Settings.
 
-Optional:
-- `SOURCE_DOC_PATH` lets you point to a custom source document file.
-- Default is `./data/source-of-truth.txt`.
+**Project Management & Collaboration**
+Jira
+Scrum Methodology
+GitHub Pull Requests (PRs)
+MCP for task organization
 
-## Run
+⚙️ Core Features
 
-```bash
-npm run dev
-```
+Appointment scheduling assistance with Express JSON API backend
+Veterinary service information retrieval
+Business rules and operational logistics
+Short-term conversational memory
+Semantic document retrieval
+Production-ready deployment (vercel.json)
+Traceable chatbot logs
+Client chooses day only (not surgery time), per policy.
 
-Server starts at `http://localhost:3000` by default.
+🔄 Development Process
 
-## API Endpoints
+The project followed a Specification-Driven Development (SDD) approach.
 
-- `GET /api/health` - Health check
-- `POST /api/book` - Validate and create booking
-- `POST /api/chat` - Ask policy/chat questions (with short-term memory)
-- `POST /api/memory/clear` - Clear short-term memory
-- `POST /api/source/refresh` - Clear semantic cache after updating source document
 
-## Important Notes
+📚 Knowledge Source
 
-- Current storage is in-memory only; bookings and memory reset on server restart.
-- For per-user memory, provide `sessionId` in request body or `x-session-id` header.
-- Client chooses day only (not surgery time), per policy.
-- Source-of-truth defaults to `data/source-of-truth.txt`; if missing, embedded fallback text is used.
+The chatbot responses were grounded using one centralized,holistic PDF document containing: `data/source-of-truth.txt`
+
+This ensured consistency, reliability, and contextual accuracy in chatbot responses.
+
+🚀 Outcome
+
+Successfully developed and deployed a fully functional veterinary clinic chatbot capable of handling operational and informational queries using modern AI engineering workflows and RAG-based architecture.
+
+📸 Project Preview
+
+<img width="900" height="407" alt="Screenshot 2026-05-13 134129" src="https://github.com/user-attachments/assets/b8cf8ed3-8677-4d09-8377-e86f4b1b2188" /><img width="1263" height="407" alt="Screenshot 2026-05-13 134129" src="https://github.com/user-attachments/assets/40c8ee32-2157-4a6e-b919-4c65407b9b74" />
+
+
+
+🔗 Repository
+
+Repo Name: Chatbot-ready
+
+👩‍💻 Author
+
+[Dasmeet Makhija]
+Data Science Student | AI & Data Analytics Enthusiast
+Skilled in SQL, Power BI, Excel, AI Tools,Python, and Machine Learning
+
+
+
